@@ -7,6 +7,7 @@ Makes use of the [MySportsFeeds API](https://www.mysportsfeeds.com) - a flexible
 Free for Non-Commercial Use.
 
 ##Install
+
 `devtools::install_github("MySportsFeeds/mysportsfeeds-r")`
 
 ##Usage
