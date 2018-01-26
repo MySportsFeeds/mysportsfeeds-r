@@ -6,11 +6,11 @@
 #' @param password.  Your MySportsFeeds account password
 #' @examples
 #' \dontrun{
-#' authenticate_v1_0("your-username", "your_password")}
+#' authenticate_v1_x("your-username", "your_password")}
 #' @export
-#' authenticate_v1_0
+#' authenticate_v1_x
 
-authenticate_v1_0 <- function(username, password){
+authenticate_v1_x <- function(username, password){
     if(!is.null(username) & !is.null(password)){
         .MySportsFeedsEnv$data$username <- username
         .MySportsFeedsEnv$data$password <- password

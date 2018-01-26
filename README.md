@@ -16,7 +16,7 @@ If you haven't signed up for API access, do so here [https://www.mysportsfeeds.c
 
 ```
 library(mysportsfeedsR)
-authenticate_v1_0('your-username', 'your-password')
+authenticate_v1_x('your-username', 'your-password')
 ```
 
 Start making requests, specifying: league, season, feed, format, and any other applicable params for the feed
@@ -24,19 +24,19 @@ Start making requests, specifying: league, season, feed, format, and any other a
 Get all NBA 2016-2017 regular season gamelogs for Stephen Curry, in JSON format
 
 ```
-gamelogs <- msf_get_results(league='nba',season='2016-2017-regular',feed='player_gamelogs',params=list(player='stephen-curry'))
+gamelogs <- msf_get_results(version='1.2',league='nba',season='2016-2017-regular',feed='player_gamelogs',params=list(player='stephen-curry'))
 ```
 
 Get all NFL 2015-2016 regular season seasonal stats totals for all Dallas Cowboys players, in XML format
 
 ```
-season_stats <- msf_get_results(league='nfl',season='2015-2016-regular',feed='cumulative_player_stats',params=list(team='dallas-cowboys'))
+season_stats <- msf_get_results(version='1.2',league='nfl',season='2015-2016-regular',feed='cumulative_player_stats',params=list(team='dallas-cowboys'))
 ```
 
 Get full game schedule for the MLB 2016 playoff season, in CSV format
 
 ```
-full_sched <- msf_get_results(league='mlb',season='2016-playoff',feed='full_game_schedule')
+full_sched <- msf_get_results(version='1.2',league='mlb',season='2016-playoff',feed='full_game_schedule')
 ```
 
 That's it!  Enjoy all the data you can eat!

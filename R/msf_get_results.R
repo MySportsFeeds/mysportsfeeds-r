@@ -2,7 +2,7 @@
 #'
 #' Return data from the MySportsFeeds API
 #'
-#' @param version character. The version of the API. Defaults to "1.0".
+#' @param version character. The version of the API. Defaults to "1.2".
 #' @param league character. The league abbreviation. (e.g. - "nhl", "nfl", "nba", "mlb")
 #' @param season character. The applicable season.  (e.g. - "2016-2017-regular")
 #' @param feed character. The name of the requested feed.  (e.g. - "player_gamelogs")
@@ -13,8 +13,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' authenticate_v1_0("your_username", "your_password")
-#' results <- msf_get_results(version = "1.0",
+#' authenticate_v1_x("your_username", "your_password")
+#' results <- msf_get_results(version = "1.2",
 #'                            league = "nhl",
 #'                            season = "2016-2017-regular",
 #'                            feed = "player_gamelogs",
@@ -24,7 +24,7 @@
 #' @export
 #' msf_get_results
 
-msf_get_results <- function(version="1.0",
+msf_get_results <- function(version="1.2",
                             league,
                             season,
                             feed,
@@ -36,22 +36,24 @@ msf_get_results <- function(version="1.0",
     print("Making API request ...")
   }
 
-  ## make the request (v1.0)
-  response <- .make_request_v1_0(.MySportsFeedsEnv$data$username, .MySportsFeedsEnv$data$password,
+  ## make the request
+  response <- .make_request(version, .MySportsFeedsEnv$data$username, .MySportsFeedsEnv$data$password,
     league, season, feed, params, verbose=TRUE)
 
 }
 
-.make_request_v1_0 <- function(username,
-                               password,
-                               league,
-                               season,
-                               feed,
-                               params = list(),
-                               verbose = FALSE) {
+.make_request <- function(version,
+                          username,
+                          password,
+                          league,
+                          season,
+                          feed,
+                          params = list(),
+                          verbose = FALSE) {
 
   ## verify inputs
-  stopifnot(is.character(username),
+  stopifnot(is.character(version),
+            is.character(username),
             is.character(password),
             is.character(league),
             is.character(feed),
@@ -71,9 +73,9 @@ msf_get_results <- function(version="1.0",
 
   ## build the URL
   if ( feed == "current_season" ) {
-    URL <- sprintf("https://www.mysportsfeeds.com/api/feed/pull/%s/current_season.json")
+    URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/current_season.json", version, league)
   } else {
-    URL <- sprintf("https://www.mysportsfeeds.com/api/feed/pull/%s/%s/%s.json", league, season, feed)
+    URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/%s.json", version, league, season, feed)
   }
   if (verbose) {
     print(sprintf("URL = '%s'", URL))
