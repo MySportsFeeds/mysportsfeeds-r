@@ -1,6 +1,6 @@
 Package: mysportsfeedsR
 Title: R functions for accessing the MySportsFeeds API
-Version: 0.1.0
+Version: 1.0.0
 Author: MySportsFeeds, Brad Barkhouse
 Description: An easy-to-use wrapper for the MySportsFeeds API, enabling sports data enthusiasts to pull stats and more directly into their R environment.
 Depends:

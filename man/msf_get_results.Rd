@@ -4,11 +4,11 @@
 \alias{msf_get_results}
 \title{Interface with the MySportsFeeds API}
 \usage{
-msf_get_results(version = "1.0", league, season, feed, params = list(),
+msf_get_results(version = "1.2", league, season, feed, params = list(),
   verbose = FALSE)
 }
 \arguments{
-\item{version}{character. The version of the API. Defaults to "1.0".}
+\item{version}{character. The version of the API. Defaults to "1.2".}
 
 \item{league}{character. The league abbreviation. (e.g. - "nhl", "nfl", "nba", "mlb")}
 
@@ -28,8 +28,8 @@ Return data from the MySportsFeeds API
 }
 \examples{
 \dontrun{
-authenticate_v1_0("your_username", "your_password")
-results <- msf_get_results(version = "1.0",
+authenticate_v1_x("your_username", "your_password")
+results <- msf_get_results(version = "1.2",
                            league = "nhl",
                            season = "2016-2017-regular",
                            feed = "player_gamelogs",
