@@ -4,10 +4,10 @@
 \alias{authenticate_v1_x}
 \title{Authenticate against the MySportsFeeds API (v1.x)}
 \usage{
-authenticate_v1_x(username, password)
+authenticate_v1_x(apikey, password)
 }
 \arguments{
-\item{username.}{Your MySportsFeeds account username}
+\item{apikey.}{Your MySportsFeeds API Key}
 
 \item{password.}{Your MySportsFeeds account password}
 }
@@ -16,5 +16,5 @@ Sets the authentication credentials in R environment variables
 }
 \examples{
 \dontrun{
-authenticate_v1_x("your-username", "your_password")}
+authenticate_v1_x("<your_api_key>", "<your_account_password>")}
 }

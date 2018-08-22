@@ -28,11 +28,20 @@ Return data from the MySportsFeeds API
 }
 \examples{
 \dontrun{
-authenticate_v1_x("your_username", "your_password")
+authenticate_v1_x("<your_api_key>", "<your_account_password>")
 results <- msf_get_results(version = "1.2",
                            league = "nhl",
                            season = "2016-2017-regular",
                            feed = "player_gamelogs",
+                           params = list()
+                           verbose = TRUE)
+}
+\dontrun{
+authenticate_v2_x("<your_api_key>")
+results <- msf_get_results(version = "2.0",
+                           league = "nhl",
+                           season = "2016-2017-regular",
+                           feed = "seasonal_player_gamelogs",
                            params = list()
                            verbose = TRUE)
 }
