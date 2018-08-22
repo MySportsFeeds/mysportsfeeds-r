@@ -54,7 +54,7 @@ msf_get_results <- function(version="1.2",
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/%s.json", version, league, season, feed)
   }
 
-  return URL
+  return(URL)
 }
 
 .determine_url_v2_x <- function(version,
@@ -252,7 +252,7 @@ msf_get_results <- function(version="1.2",
     error("Unrecognized feed '" + feed + "'.");
   }
 
-  return URL
+  return(URL)
 }
 
 .make_request <- function(version,
@@ -286,13 +286,13 @@ msf_get_results <- function(version="1.2",
 
   ## build the URL
   if ( version == '2.0' ) {
-    URL = .determine_url_v2_x(version,
+    URL <- .determine_url_v2_x(version,
                               league,
                               season,
                               feed,
                               params);
   } else {
-    URL = .determine_url_v1_x(version,
+    URL <- .determine_url_v1_x(version,
                               league,
                               season,
                               feed,
