@@ -320,6 +320,20 @@ msf_get_results <- function(version="1.2",
               user_agent(UA),
               query = params)
 
+  # get the HTTP return code
+  return_code <- http::status_code(resp)
+  if (return_code != 200) {
+
+    # the request failed - there is no point in continuing!
+    # print the received response and stop
+    print(resp)
+    stop(paste(
+      "HTTP request failed with status code",
+      return_code,
+      "- Check the parameters to 'msf_get_results'"
+    ))
+  }
+
   ## convert response to text first, do not use baseline httr::content default
   api_response <- content(resp, as="text")
 
