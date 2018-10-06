@@ -321,7 +321,7 @@ msf_get_results <- function(version="1.2",
               query = params)
 
   # get the HTTP return code
-  return_code <- http::status_code(resp)
+  return_code <- httr::status_code(resp)
   if (return_code != 200) {
 
     # the request failed - there is no point in continuing!
