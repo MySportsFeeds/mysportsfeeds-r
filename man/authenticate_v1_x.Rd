@@ -16,5 +16,5 @@ Sets the authentication credentials in R environment variables
 }
 \examples{
 \dontrun{
-authenticate_v1_x("<your_api_key>", "<your_account_password>")}
+authenticate_v1_x("<your-api-key>", "<your_account_password>")}
 }
