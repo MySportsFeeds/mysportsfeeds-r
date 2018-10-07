@@ -13,13 +13,13 @@
 #'
 #' @examples
 #' \dontrun{
-#' authenticate_v1_x("your_username", "your_password")
-#' results <- msf_get_results(version = "1.2",
-#'                            league = "nhl",
-#'                            season = "2016-2017-regular",
-#'                            feed = "player_gamelogs",
-#'                            params = list()
-#'                            verbose = TRUE)
+#' authenticate_v2_x("<your_api_key>")
+#' nba_2017_2018_games <- msf_get_results(version = "2.0",
+#'                                        league = "nba",
+#'                                        season = "2017-2018-regular",
+#'                                        feed = "seasonal_games",
+#'                                        params = list(),
+#'                                        verbose = TRUE)
 #' }
 #' @export
 #' msf_get_results
@@ -65,138 +65,138 @@ msf_get_results <- function(version="1.2",
 
   if ( feed == "seasonal_games" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'seasonal_games'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/games.json", version, league, season)
 
   } else if ( feed == "daily_games" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'daily_games'.");
     }
     if ( is.null(params["date"]) ) {
-      error("You must specify a 'date' param for this request.");
+      stop("You must specify a 'date' param for 'daily_games'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/date/%s/games.json", version, league, season, params["date"])
 
   } else if ( feed == "weekly_games" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'weekly_games'.");
     }
     if ( is.null(params["week"]) ) {
-      error("You must specify a 'week' param for this request.");
+      stop("You must specify a 'week' param for 'weekly_games'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/week/%s/games.json", version, league, season, params["week"])
 
   } else if ( feed == "seasonal_dfs" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'seasonal_dfs'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/dfs.json", version, league, season)
 
   } else if ( feed == "daily_dfs" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'daily_dfs'.");
     }
     if ( is.null(params["date"]) ) {
-      error("You must specify a 'date' param for this request.");
+      stop("You must specify a 'date' param for 'daily_dfs'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/date/%s/dfs.json", version, league, season, params["date"])
 
   } else if ( feed == "weekly_dfs" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'weekly_dfs'.");
     }
     if ( is.null(params["week"]) ) {
-      error("You must specify a 'week' param for this request.");
+      stop("You must specify a 'week' param for 'weekly_dfs'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/week/%s/dfs.json", version, league, season, params["week"])
 
   } else if ( feed == "seasonal_player_gamelogs" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'seasonal_player_gamelogs'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/player_gamelogs.json", version, league, season)
 
   } else if ( feed == "daily_player_gamelogs" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'daily_player_gamelogs'.");
     }
     if ( is.null(params["date"]) ) {
-      error("You must specify a 'date' param for this request.");
+      stop("You must specify a 'date' param for 'daily_player_gamelogs'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/date/%s/player_gamelogs.json", version, league, season, params["date"])
 
   } else if ( feed == "weekly_player_gamelogs" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'weekly_player_gamelogs'.");
     }
     if ( is.null(params["week"]) ) {
-      error("You must specify a 'week' param for this request.");
+      stop("You must specify a 'week' param for 'weekly_player_gamelogs'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/week/%s/player_gamelogs.json", version, league, season, params["week"])
 
   } else if ( feed == "seasonal_team_gamelogs" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'seasonal_team_gamelogs'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/team_gamelogs.json", version, league, season)
 
   } else if ( feed == "daily_team_gamelogs" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'daily_team_gamelogs'.");
     }
     if ( is.null(params["date"]) ) {
-      error("You must specify a 'date' param for this request.");
+      stop("You must specify a 'date' param for 'daily_team_gamelogs'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/date/%s/team_gamelogs.json", version, league, season, params["date"])
 
   } else if ( feed == "weekly_team_gamelogs" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'weekly_team_gamelogs'.");
     }
     if ( is.null(params["week"]) ) {
-      error("You must specify a 'week' param for this request.");
+      stop("You must specify a 'week' param for 'weekly_team_gamelogs'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/week/%s/team_gamelogs.json", version, league, season, params["week"])
 
   } else if ( feed == "game_boxscore" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'game_boxscore'.");
     }
     if ( is.null(params["game"]) ) {
-      error("You must specify a 'game' param for this request.");
+      stop("You must specify a 'game' param for 'game_boxscore'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/games/%s/boxscore.json", version, league, season, params["game"])
 
   } else if ( feed == "game_playbyplay" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'game_playbyplay'.");
     }
     if ( is.null(params["game"]) ) {
-      error("You must specify a 'game' param for this request.");
+      stop("You must specify a 'game' param for 'game_playbyplay'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/games/%s/playbyplay.json", version, league, season, params["game"])
 
   } else if ( feed == "game_lineup" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'game_lineup'.");
     }
     if ( is.null(params["game"]) ) {
-      error("You must specify a 'game' param for this request.");
+      stop("You must specify a 'game' param for 'game_lineup'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/games/%s/lineup.json", version, league, season, params["game"])
@@ -211,28 +211,28 @@ msf_get_results <- function(version="1.2",
 
   } else if ( feed == "latest_updates" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'latest_updates'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/latest_updates.json", version, league, season)
 
   } else if ( feed == "seasonal_team_stats" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'seasonal_team_stats'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/team_stats_totals.json", version, league, season)
 
   } else if ( feed == "seasonal_player_stats" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'seasonal_player_stats'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/player_stats_totals.json", version, league, season)
 
   } else if ( feed == "seasonal_venues" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'seasonal_venues'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/venues.json", version, league, season)
@@ -243,13 +243,13 @@ msf_get_results <- function(version="1.2",
 
   } else if ( feed == "seasonal_standings" ) {
     if ( is.null(season) ) {
-      error("You must specify a season for this request.");
+      stop("You must specify a season for 'seasonal_standings'.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/standings.json", version, league, season)
 
   } else {
-    error("Unrecognized feed '" + feed + "'.");
+    stop("Unrecognized feed '" + feed + "'.");
   }
 
   return(URL)
@@ -319,6 +319,20 @@ msf_get_results <- function(version="1.2",
               authenticate(apikey, password),
               user_agent(UA),
               query = params)
+
+  # get the HTTP return code
+  return_code <- httr::status_code(resp)
+  if (return_code != 200) {
+
+    # the request failed - there is no point in continuing!
+    # print the received response and stop
+    print(resp)
+    stop(paste(
+      "HTTP request failed with status code",
+      return_code,
+      "- Check the parameters to 'msf_get_results'"
+    ))
+  }
 
   ## convert response to text first, do not use baseline httr::content default
   api_response <- content(resp, as="text")
