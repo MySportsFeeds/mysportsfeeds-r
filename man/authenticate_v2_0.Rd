@@ -8,7 +8,7 @@ authenticate_v2_x(apikey)
 }
 \arguments{
 \item{apikey.}{Your MySportsFeeds API Key}
-
+}
 \description{
 Sets the authentication credentials in R environment variables
 }
