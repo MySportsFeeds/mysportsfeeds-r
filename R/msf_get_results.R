@@ -321,7 +321,7 @@ msf_get_results <- function(version="1.2",
               query = params)
 
   ## convert response to text first, do not use baseline httr::content default
-  api_response <- content(resp, as="text")
+  api_response <- httr::content(resp, as="text")
 
   ## use jsonlite::fromJSON
   api_response <- jsonlite::fromJSON(api_response, flatten=TRUE)
