@@ -316,7 +316,7 @@ msf_get_results <- function(version="1.2",
   resp <- httr::GET(URL,
               add_headers('Accept-Encoding' = "gzip",
                           'Content-Type' = "application/json"),
-              authenticate(apikey, password),
+              httr::authenticate(apikey, password),
               user_agent(UA),
               query = params)
 
