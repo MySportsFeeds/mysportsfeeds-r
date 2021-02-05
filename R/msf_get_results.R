@@ -314,10 +314,10 @@ msf_get_results <- function(version="1.2",
   UA <- sprintf("MySportsFeeds-R/%s (%s)", package_v, platform)
 
   resp <- httr::GET(URL,
-              add_headers('Accept-Encoding' = "gzip",
+              httr::add_headers('Accept-Encoding' = "gzip",
                           'Content-Type' = "application/json"),
               httr::authenticate(apikey, password),
-              user_agent(UA),
+              httr::user_agent(UA),
               query = params)
 
   ## convert response to text first, do not use baseline httr::content default
