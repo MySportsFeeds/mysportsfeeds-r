@@ -10,6 +10,16 @@
 #' @param verbose logical. For debugging, prints status messages to the console, which can be helpful for walking through results. Default is TRUE.
 #'
 #' @return a list.
+#' @return Response Codes:
+#' @return 200: Request was successful
+#' @return 204: Feed content not found. There is no available content for the feed as of yet.
+#' @return 304: This response code coincides with the optional URL parameter.
+#' @return 400: This indicates that some part of the request is malformed.
+#' @return 401: Not authenticated.
+#' @return 403: Not authorized. You might be trying to access a feed without the correct subscription.
+#' @return 429: Too many requests.
+#' @return 500: An internal error has occured and has been logged for further inspection. Let us know if you're receiving this response unexpectedly!
+#' @return 499,502,503: These usually mean we're in the process of publishing system updates. It should resolve in a matter of a few seconds. If you are seeing this consistently please contact us.
 #'
 #' @examples
 #' \dontrun{
@@ -37,8 +47,14 @@ msf_get_results <- function(version="1.2",
   }
 
   ## make the request
-  response <- .make_request(version, .MySportsFeedsEnv$data$apikey, .MySportsFeedsEnv$data$password,
-    league, season, feed, params, verbose=TRUE)
+  response <- .make_request(version,
+                            .MySportsFeedsEnv$data$apikey,
+                            .MySportsFeedsEnv$data$password,
+                            league,
+                            season,
+                            feed,
+                            params,
+                            verbose=TRUE)
 
 }
 
@@ -70,7 +86,8 @@ msf_get_results <- function(version="1.2",
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/games.json", version, league, season)
 
-  } else if ( feed == "daily_games" ) {
+  }
+  else if ( feed == "daily_games" ) {
     if ( is.null(season) ) {
       stop("You must specify a season for this request.");
     }
@@ -80,7 +97,8 @@ msf_get_results <- function(version="1.2",
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/date/%s/games.json", version, league, season, params["date"])
 
-  } else if ( feed == "weekly_games" ) {
+  }
+  else if ( feed == "weekly_games" ) {
     if ( is.null(season) ) {
       stop("You must specify a season for this request.");
     }
@@ -90,14 +108,16 @@ msf_get_results <- function(version="1.2",
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/week/%s/games.json", version, league, season, params["week"])
 
-  } else if ( feed == "seasonal_dfs" ) {
+  }
+  else if ( feed == "seasonal_dfs" ) {
     if ( is.null(season) ) {
       stop("You must specify a season for this request.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/dfs.json", version, league, season)
 
-  } else if ( feed == "daily_dfs" ) {
+  }
+  else if ( feed == "daily_dfs" ) {
     if ( is.null(season) ) {
       stop("You must specify a season for this request.");
     }
@@ -107,7 +127,8 @@ msf_get_results <- function(version="1.2",
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/date/%s/dfs.json", version, league, season, params["date"])
 
-  } else if ( feed == "weekly_dfs" ) {
+  }
+  else if ( feed == "weekly_dfs" ) {
     if ( is.null(season) ) {
       stop("You must specify a season for this request.");
     }
@@ -117,14 +138,16 @@ msf_get_results <- function(version="1.2",
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/week/%s/dfs.json", version, league, season, params["week"])
 
-  } else if ( feed == "seasonal_player_gamelogs" ) {
+  }
+  else if ( feed == "seasonal_player_gamelogs" ) {
     if ( is.null(season) ) {
       stop("You must specify a season for this request.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/player_gamelogs.json", version, league, season)
 
-  } else if ( feed == "daily_player_gamelogs" ) {
+  }
+  else if ( feed == "daily_player_gamelogs" ) {
     if ( is.null(season) ) {
       stop("You must specify a season for this request.");
     }
@@ -134,7 +157,8 @@ msf_get_results <- function(version="1.2",
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/date/%s/player_gamelogs.json", version, league, season, params["date"])
 
-  } else if ( feed == "weekly_player_gamelogs" ) {
+  }
+  else if ( feed == "weekly_player_gamelogs" ) {
     if ( is.null(season) ) {
       stop("You must specify a season for this request.");
     }
@@ -144,14 +168,16 @@ msf_get_results <- function(version="1.2",
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/week/%s/player_gamelogs.json", version, league, season, params["week"])
 
-  } else if ( feed == "seasonal_team_gamelogs" ) {
+  }
+  else if ( feed == "seasonal_team_gamelogs" ) {
     if ( is.null(season) ) {
       stop("You must specify a season for this request.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/team_gamelogs.json", version, league, season)
 
-  } else if ( feed == "daily_team_gamelogs" ) {
+  }
+  else if ( feed == "daily_team_gamelogs" ) {
     if ( is.null(season) ) {
       stop("You must specify a season for this request.");
     }
@@ -161,7 +187,8 @@ msf_get_results <- function(version="1.2",
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/date/%s/team_gamelogs.json", version, league, season, params["date"])
 
-  } else if ( feed == "weekly_team_gamelogs" ) {
+  }
+  else if ( feed == "weekly_team_gamelogs" ) {
     if ( is.null(season) ) {
       stop("You must specify a season for this request.");
     }
@@ -171,7 +198,8 @@ msf_get_results <- function(version="1.2",
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/week/%s/team_gamelogs.json", version, league, season, params["week"])
 
-  } else if ( feed == "game_boxscore" ) {
+  }
+  else if ( feed == "game_boxscore" ) {
     if ( is.null(season) ) {
       stop("You must specify a season for this request.");
     }
@@ -181,7 +209,8 @@ msf_get_results <- function(version="1.2",
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/games/%s/boxscore.json", version, league, season, params["game"])
 
-  } else if ( feed == "game_playbyplay" ) {
+  }
+  else if ( feed == "game_playbyplay" ) {
     if ( is.null(season) ) {
       stop("You must specify a season for this request.");
     }
@@ -191,7 +220,8 @@ msf_get_results <- function(version="1.2",
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/games/%s/playbyplay.json", version, league, season, params["game"])
 
-  } else if ( feed == "game_lineup" ) {
+  }
+  else if ( feed == "game_lineup" ) {
     if ( is.null(season) ) {
       stop("You must specify a season for this request.");
     }
@@ -201,54 +231,74 @@ msf_get_results <- function(version="1.2",
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/games/%s/lineup.json", version, league, season, params["game"])
 
-  } else if ( feed == "current_season" ) {
+  }
+  else if ( feed == "current_season" ) {
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/current_season.json", version, league)
 
-  } else if ( feed == "player_injuries" ) {
+  }
+  else if ( feed == "player_injuries" ) {
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/injuries.json", version, league)
 
-  } else if ( feed == "latest_updates" ) {
+  }
+  else if ( feed == "latest_updates" ) {
     if ( is.null(season) ) {
       stop("You must specify a season for this request.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/latest_updates.json", version, league, season)
 
-  } else if ( feed == "seasonal_team_stats" ) {
+  }
+  else if ( feed == "seasonal_team_stats" ) {
     if ( is.null(season) ) {
       stop("You must specify a season for this request.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/team_stats_totals.json", version, league, season)
 
-  } else if ( feed == "seasonal_player_stats" ) {
+  }
+  else if ( feed == "seasonal_player_stats" ) {
     if ( is.null(season) ) {
       stop("You must specify a season for this request.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/player_stats_totals.json", version, league, season)
 
-  } else if ( feed == "seasonal_venues" ) {
+  }
+  else if ( feed == "seasonal_venues" ) {
     if ( is.null(season) ) {
       stop("You must specify a season for this request.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/venues.json", version, league, season)
 
-  } else if ( feed == "players" ) {
+  }
+  else if ( feed == "players" ) {
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/players.json", version, league)
 
-  } else if ( feed == "seasonal_standings" ) {
+  }
+  else if ( feed == "seasonal_standings" ) {
     if ( is.null(season) ) {
       stop("You must specify a season for this request.");
     }
 
     URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/standings.json", version, league, season)
 
-  } else {
+  }
+  else if ( feed == "odds_gamelines" ) {
+    if ( is.null(season) ) {
+      stop("You must specify a season for this request.");
+    }
+    if ( is.null(params["date"]) ) {
+      stop("You must specify a 'date' param for this request.");
+    }
+
+    URL <- sprintf("https://api.mysportsfeeds.com/v%s/pull/%s/%s/date/%s/odds_gamelines.json", version, league, season, params["date"])
+
+  }
+  else {
     stop("Unrecognized feed '", feed, "'.");
   }
 
@@ -285,7 +335,7 @@ msf_get_results <- function(version="1.2",
   feed = tolower(feed)
 
   ## build the URL
-  if ( version == '2.0' ) {
+  if ( version == '2.0' | version == '2.1' ) {
     URL <- .determine_url_v2_x(version,
                               league,
                               season,
@@ -314,17 +364,33 @@ msf_get_results <- function(version="1.2",
   UA <- sprintf("MySportsFeeds-R/%s (%s)", package_v, platform)
 
   resp <- httr::GET(URL,
-              add_headers('Accept-Encoding' = "gzip",
+              httr::add_headers('Accept-Encoding' = "gzip",
                           'Content-Type' = "application/json"),
-              authenticate(apikey, password),
-              user_agent(UA),
+              httr::authenticate(apikey, password),
+              httr::user_agent(UA),
               query = params)
 
   ## convert response to text first, do not use baseline httr::content default
-  api_response <- content(resp, as="text")
+  api_response <- httr::content(resp, as="text")
 
   ## use jsonlite::fromJSON
-  api_response <- jsonlite::fromJSON(api_response, flatten=TRUE)
+  tryCatch(
+    # This is what I want to do...
+    {
+      #y = x * 2
+      #return(y)
+      api_response <- jsonlite::fromJSON(api_response, flatten=TRUE)
+    },
+    # ... but if an error occurs, tell me what happened:
+    error=function(error_message) {
+      message("Something went wrong...")
+      message(paste("URL Used:", resp[1]))
+      message(paste("Response Code Returned:", resp[2]))
+      message("Type ?msf_get_results in the console for more info on response codes.")
+      return(NA)
+    }
+  )
+
 
   ## if verbose = TRUE, return a list that includes the parsed results
   ## and the original request

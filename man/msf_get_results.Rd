@@ -4,8 +4,14 @@
 \alias{msf_get_results}
 \title{Interface with the MySportsFeeds API}
 \usage{
-msf_get_results(version = "1.2", league, season, feed, params = list(),
-  verbose = FALSE)
+msf_get_results(
+  version = "1.2",
+  league,
+  season,
+  feed,
+  params = list(),
+  verbose = FALSE
+)
 }
 \arguments{
 \item{version}{character. The version of the API. Defaults to "1.2".}
@@ -22,26 +28,37 @@ msf_get_results(version = "1.2", league, season, feed, params = list(),
 }
 \value{
 a list.
+
+Response Codes:
+
+200: Request was successful
+
+204: Feed content not found. There is no available content for the feed as of yet.
+
+304: This response code coincides with the optional URL parameter.
+
+400: This indicates that some part of the request is malformed.
+
+401: Not authenticated.
+
+403: Not authorized. You might be trying to access a feed without the correct subscription.
+
+429: Too many requests.
+
+500: An internal error has occured and has been logged for further inspection. Let us know if you're receiving this response unexpectedly!
+
+499,502,503: These usually mean we're in the process of publishing system updates. It should resolve in a matter of a few seconds. If you are seeing this consistently please contact us.
 }
 \description{
 Return data from the MySportsFeeds API
 }
 \examples{
 \dontrun{
-authenticate_v1_x("<your_api_key>", "<your_account_password>")
+authenticate_v1_x("your_username", "your_password")
 results <- msf_get_results(version = "1.2",
                            league = "nhl",
                            season = "2016-2017-regular",
                            feed = "player_gamelogs",
-                           params = list()
-                           verbose = TRUE)
-}
-\dontrun{
-authenticate_v2_x("<your_api_key>")
-results <- msf_get_results(version = "2.0",
-                           league = "nhl",
-                           season = "2016-2017-regular",
-                           feed = "seasonal_player_gamelogs",
                            params = list()
                            verbose = TRUE)
 }
