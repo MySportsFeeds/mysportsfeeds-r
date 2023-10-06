@@ -28,7 +28,7 @@
 #'                            league = "nhl",
 #'                            season = "2016-2017-regular",
 #'                            feed = "player_gamelogs",
-#'                            params = list()
+#'                            params = list(),
 #'                            verbose = TRUE)
 #' }
 #' @export
